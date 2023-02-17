@@ -5,6 +5,7 @@ import HomeContainer from '../components/Container/HomeContainer';
 import SearchInput from '../components/SearchInput/searchInput';
 import HeaderBox from '../components/HeaderBox/headerBox';
 import MovieList from '../components/MovieList/movieList';
+import theme from '../utils/theme';
 
 
 function HomeScreen({ }) {
@@ -20,7 +21,7 @@ function HomeScreen({ }) {
                     </Text>
                     <SearchInput styleview={{ marginTop: 30 }} placeholder='Search for a movie,tv shows,person......'>
                         <Button style={{
-                            backgroundColor: 'lightgreen',
+                            backgroundColor: theme.colors.tmdbLightGreen,
                             height: 44,
                             width: 100,
                             position: 'absolute',
@@ -30,15 +31,17 @@ function HomeScreen({ }) {
 
                 <HomeContainer source={backLogo}>
                     <HeaderBox selection={['Today', 'This Week', 'Trending', 'Popular']}>Trending</HeaderBox>
-                    <MovieList>{}</MovieList>
+                    <MovieList>{ }</MovieList>
                 </HomeContainer>
 
-                <HomeContainer>
+                <HomeContainer >
                     <HeaderBox selection={['Streaming', 'On Tv', 'For Rent', 'In Theaters']}>What's Popular</HeaderBox>
+                    <MovieList>{ }</MovieList>
                 </HomeContainer>
 
                 <HomeContainer>
-                    <HeaderBox selection={[ 'Movies', 'On Tv']}>Free To Watch</HeaderBox>
+                    <HeaderBox selection={['Movies', 'On Tv']}>Free To Watch</HeaderBox>
+                    <MovieList>{ }</MovieList>
                 </HomeContainer>
 
             </ScrollView>

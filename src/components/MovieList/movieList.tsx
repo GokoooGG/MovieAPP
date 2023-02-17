@@ -7,7 +7,7 @@ import Movie from '../Movie/movie';
 
 
 
-const MovieList: FC<Props> = (props) => {
+const MovieList: FC<Props | any> = (props) => {
     const image = { uri: "https://www.themoviedb.org/t/p/w440_and_h660_face/ngl2FKBlU4fhbdsrtdom9LVLBXw.jpg" }
     const MovieImage = { uri: "https://www.themoviedb.org/t/p/w440_and_h660_face/ngl2FKBlU4fhbdsrtdom9LVLBXw.jpg" }
     let title = 'sadasdasd'

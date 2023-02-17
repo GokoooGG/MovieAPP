@@ -5,17 +5,20 @@ import theme from "../../utils/theme";
 const styles = StyleSheet.create({
     text: {
         color: theme.colors.tmdbDarkBlue,
-        marginRight: 40,
+        paddingHorizontal: 20,
         fontWeight: '600',
         fontSize: 25
     },
     view: {
         flexDirection: "row",
         marginTop: 20,
-        justifyContent: 'center',
+
         alignItems: 'center',
     },
     button: {
+        position: 'absolute',
+        left:210,
+        width: 180,
         borderWidth: 1,
         borderRadius: 30,
         backgroundColor: theme.colors.tmdbDarkBlue,
