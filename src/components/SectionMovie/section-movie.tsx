@@ -1,16 +1,32 @@
-import React, { FC, useState } from 'react';
-import { View, Text, ImageBackground } from 'react-native';
+import React, { FC, useEffect, useState } from 'react'
+import { Text, View } from 'react-native'
 
-import styles from './headerStyle';
-import { Props } from './types';
-import SelectDropdown from 'react-native-select-dropdown';
+import { Props } from './types'
 import theme from '../../utils/theme';
 
-const HeaderBox: FC<Props> = (props) => {
+import SelectDropdown from 'react-native-select-dropdown'
+import styles from './sectionStyles'
+import MovieList from '../MovieList/movieList'
+import { getTrendMovies } from '../../services';
 
-    const [selected, setSelected] = useState([props.selected])
-    const data = props.selection
+const SectionMovie: FC<Props> = (props) => {
+    const [selected , setSelected] = useState(props.selected)
+    const data = props.selectionList
+    const [movies, setMovies] = useState([])
+
+    useEffect(() => {
+        initMovies()
+    }, [selected])
+
+
+    const initMovies = async () => {
+        const movieData =await getTrendMovies(selected)
+
+        setMovies(movieData.results)
+    }
+
     return (
+        <View style={{ flex: 1 }}>
             <View style={styles.view}>
                 <Text style={styles.text} >{props.children}</Text>
                 <SelectDropdown
@@ -23,7 +39,12 @@ const HeaderBox: FC<Props> = (props) => {
                     data={data}
                     defaultValueByIndex={0}
                     onSelect={(selectedItem, index) => {
-                        setSelected(selectedItem)
+                        if (selectedItem == 'Today') {
+                            setSelected("day")
+                        }
+                        else if (selectedItem == 'This Week'){
+                            setSelected("week")
+                        }
                     }}
                     buttonTextAfterSelection={(selectedItem, index) => {
                         // text represented after item is selected
@@ -34,10 +55,10 @@ const HeaderBox: FC<Props> = (props) => {
                         // text represented for each item in dropdown
                         // if data array is an array of objects then return item.property to represent item in dropdown
                         return item
-                    }} />
+                    }}/>
             </View>
-
+            <MovieList selected={selected} data={movies}/>
+        </View>
     )
 }
-
-export default HeaderBox;
+export default SectionMovie;

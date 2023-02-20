@@ -1,16 +1,18 @@
-import * as React from 'react';
+import React, { FC, useState } from 'react';
 import { SafeAreaView, StyleSheet, Text, TextInput, View, ScrollView } from 'react-native';
 import Button from '../components/Button/button';
 import HomeContainer from '../components/Container/HomeContainer';
 import SearchInput from '../components/SearchInput/searchInput';
-import HeaderBox from '../components/HeaderBox/headerBox';
-import MovieList from '../components/MovieList/movieList';
+
 import theme from '../utils/theme';
+import SectionMovie from '../components/SectionMovie/section-movie';
 
 
 function HomeScreen({ }) {
     const image1 = { uri: 'https://www.themoviedb.org/t/p/w1920_and_h600_multi_faces_filter(duotone,00192f,00baff)/zqkmTXzjkAgXmEWLRsY4UpTWCeo.jpg' }
     const backLogo = require('../assets/images/backLogo.png')
+
+    const [selected, setSelected] = useState([])
     return (
         <SafeAreaView style={{ flex: 1 }} >
             <ScrollView>
@@ -30,18 +32,7 @@ function HomeScreen({ }) {
                 </HomeContainer>
 
                 <HomeContainer source={backLogo}>
-                    <HeaderBox selection={['Today', 'This Week', 'Trending', 'Popular']}>Trending</HeaderBox>
-                    <MovieList>{ }</MovieList>
-                </HomeContainer>
-
-                <HomeContainer >
-                    <HeaderBox selection={['Streaming', 'On Tv', 'For Rent', 'In Theaters']}>What's Popular</HeaderBox>
-                    <MovieList>{ }</MovieList>
-                </HomeContainer>
-
-                <HomeContainer>
-                    <HeaderBox selection={['Movies', 'On Tv']}>Free To Watch</HeaderBox>
-                    <MovieList>{ }</MovieList>
+                    <SectionMovie selectionList={['Today', 'This Week',]} selected='day'>Trending</SectionMovie>
                 </HomeContainer>
 
             </ScrollView>

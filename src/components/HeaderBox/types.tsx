@@ -5,4 +5,5 @@ export interface Props {
     children : ReactNode;
     style?: StyleProp<ViewStyle>;
     selection?:Array<string>;
+    selected?:string;
 }

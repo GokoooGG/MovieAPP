@@ -4,6 +4,6 @@ import { StyleProp,ViewStyle} from "react-native";
 export interface Props {
     children : ReactNode;
     style?: StyleProp<ViewStyle>;
-    selected?:string;
-    data?: any;
+    selectionList:Array<string>;
+    selected:string;
 }
