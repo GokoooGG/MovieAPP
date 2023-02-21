@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import theme from "../../utils/theme";
 
 const styles = StyleSheet.create({
     viewContain: {
@@ -6,6 +7,17 @@ const styles = StyleSheet.create({
     },
     viewText: {
         flex: 1,
+    },
+    viewCircle:{
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent:'center',
+        marginLeft:15,
+        marginTop:250,
+        height:60,
+        width:60,
+        backgroundColor:theme.colors.tmdbDarkBlue,
+        borderRadius:100,
     },
     text:{
         padding:10,
@@ -15,6 +27,12 @@ const styles = StyleSheet.create({
     },
     textDate:{
         paddingHorizontal:12
+    },
+    textPercent:{
+        position:'absolute',
+        fontSize:13,
+        right:12,
+        color:'white'
     },
     movieButton: {
         flex: 1,

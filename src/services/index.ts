@@ -12,3 +12,11 @@ export const getTrendMovies = async (keyword:string) => {
 
     return data;
 }
+
+
+export const getPopularMovies = async (keyword?:string) => {
+    const res = await fetch(url(keyword+'/popular'))
+    const data = await res.json()
+
+    return data;
+}

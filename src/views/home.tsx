@@ -32,7 +32,11 @@ function HomeScreen({ }) {
                 </HomeContainer>
 
                 <HomeContainer source={backLogo}>
-                    <SectionMovie selectionList={['Today', 'This Week',]} selected='day'>Trending</SectionMovie>
+                    <SectionMovie selectionList={['Today', 'This Week',]} selected='day' keyWord='trend'>Trending</SectionMovie>
+                </HomeContainer>
+
+                <HomeContainer>
+                    <SectionMovie selectionList={['Streaming', 'On Tv',]} selected='movie' keyWord='popular'>What's Popular</SectionMovie>
                 </HomeContainer>
 
             </ScrollView>

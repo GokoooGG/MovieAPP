@@ -6,4 +6,5 @@ export interface Props {
     style?: StyleProp<ViewStyle>;
     selectionList:Array<string>;
     selected:string;
+    keyWord:string;
 }

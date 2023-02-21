@@ -7,10 +7,10 @@ import theme from '../../utils/theme';
 import SelectDropdown from 'react-native-select-dropdown'
 import styles from './sectionStyles'
 import MovieList from '../MovieList/movieList'
-import { getTrendMovies } from '../../services';
+import { getPopularMovies, getTrendMovies } from '../../services';
 
 const SectionMovie: FC<Props> = (props) => {
-    const [selected , setSelected] = useState(props.selected)
+    const [selected, setSelected] = useState(props.selected)
     const data = props.selectionList
     const [movies, setMovies] = useState([])
 
@@ -20,10 +20,17 @@ const SectionMovie: FC<Props> = (props) => {
 
 
     const initMovies = async () => {
-        const movieData =await getTrendMovies(selected)
+        if (props.keyWord == 'trend') {
+            const movieData = await getTrendMovies(selected)
+            setMovies(movieData.results)
+        }
+        else if(props.keyWord == 'popular') {
+            const movieData = await getPopularMovies(selected)
+            setMovies(movieData.results)
+        }
 
-        setMovies(movieData.results)
     }
+
 
     return (
         <View style={{ flex: 1 }}>
@@ -42,8 +49,14 @@ const SectionMovie: FC<Props> = (props) => {
                         if (selectedItem == 'Today') {
                             setSelected("day")
                         }
-                        else if (selectedItem == 'This Week'){
+                        else if (selectedItem == 'This Week') {
                             setSelected("week")
+                        }
+                        else if (selectedItem == 'On Tv') {
+                            setSelected("tv")
+                        }
+                        else if (selectedItem == 'Streaming') {
+                            setSelected("movie")
                         }
                     }}
                     buttonTextAfterSelection={(selectedItem, index) => {
@@ -55,9 +68,9 @@ const SectionMovie: FC<Props> = (props) => {
                         // text represented for each item in dropdown
                         // if data array is an array of objects then return item.property to represent item in dropdown
                         return item
-                    }}/>
+                    }} />
             </View>
-            <MovieList selected={selected} data={movies}/>
+            <MovieList selected={selected} data={movies} />
         </View>
     )
 }
