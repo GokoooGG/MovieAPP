@@ -3,7 +3,7 @@ import theme from "../../utils/theme";
 
 const styles = StyleSheet.create({
     text: {
-        color: theme.colors.tmdbDarkBlue,
+        color: 'white',
         paddingHorizontal: 20,
         fontWeight: '600',
         fontSize: 25
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     dropDown: {
         backgroundColor: theme.colors.tmdbLighterGreen,
         borderWidth: 2,
-        borderRadius: 22,
+        borderRadius: 23,
         borderColor: theme.colors.tmdbDarkBlue,
         marginTop: -50
     }

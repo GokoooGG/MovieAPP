@@ -6,6 +6,7 @@ import SearchInput from '../components/SearchInput/searchInput';
 
 import theme from '../utils/theme';
 import SectionMovie from '../components/SectionMovie/section-movie';
+import SectionTrailer from '../components/SectionMovie/section-trailer';
 
 
 function HomeScreen({ }) {
@@ -32,11 +33,15 @@ function HomeScreen({ }) {
                 </HomeContainer>
 
                 <HomeContainer source={backLogo}>
-                    <SectionMovie selectionList={['Today', 'This Week',]} selected='day' keyWord='trend'>Trending</SectionMovie>
+                    <SectionMovie selectionList={['Today', 'This Week']} selected='day' keyWord='trend'>Trending</SectionMovie>
                 </HomeContainer>
 
                 <HomeContainer>
-                    <SectionMovie selectionList={['Streaming', 'On Tv',]} selected='movie' keyWord='popular'>What's Popular</SectionMovie>
+                    <SectionMovie selectionList={['Streaming', 'On Tv', 'Top Rated', 'Up Coming']} selected='movie/popular' keyWord='popular'>What's Popular</SectionMovie>
+                </HomeContainer>
+
+                <HomeContainer style={{ height: 350 }}>
+                    <SectionTrailer selectionList={['Streaming', 'On Tv','Up Coming']} selected='movie/popular' keyWord='popular'>Latest Trailers</SectionTrailer>
                 </HomeContainer>
 
             </ScrollView>

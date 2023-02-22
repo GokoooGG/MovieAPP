@@ -1,15 +1,18 @@
 import React, { FC, useEffect, useState } from 'react'
-import { Text, View } from 'react-native'
+import { Text, View, ImageBackground } from 'react-native';
 
 import { Props } from './types'
 import theme from '../../utils/theme';
 
 import SelectDropdown from 'react-native-select-dropdown'
 import styles from './sectionStyles'
-import MovieList from '../MovieList/movieList'
-import { getPopularMovies, getTrendMovies } from '../../services';
 
-const SectionMovie: FC<Props> = (props) => {
+import { getPopularMovies, getTrendMovies} from '../../services';
+import TrailerList from '../TrailerList/trailerList';
+import { imagePath } from '../../services/index';
+
+
+const SectionTrailer: FC<Props> = (props) => {
     const [selected, setSelected] = useState(props.selected)
     const data = props.selectionList
     const [movies, setMovies] = useState([])
@@ -23,6 +26,7 @@ const SectionMovie: FC<Props> = (props) => {
         if (props.keyWord == 'trend') {
             const movieData = await getTrendMovies(selected)
             setMovies(movieData.results)
+
         }
         else if (props.keyWord == 'popular') {
             const movieData = await getPopularMovies(selected)
@@ -34,10 +38,12 @@ const SectionMovie: FC<Props> = (props) => {
 
     return (
         <View style={{ flex: 1 }}>
+            <ImageBackground style={{flex:1}} source={{uri:imagePath+movies[0].backdrop_path}} >
+     
             <View style={styles.view}>
                 <Text style={styles.text} >{props.children}</Text>
                 <SelectDropdown
-                    onChangeSearchInputText={() => { }}
+                    onChangeSearchInputText={()=>{}}
                     buttonStyle={styles.button}
                     buttonTextStyle={styles.buttonText}
                     selectedRowTextStyle={{ color: theme.colors.tmdbLighterGreen }}
@@ -77,8 +83,9 @@ const SectionMovie: FC<Props> = (props) => {
                         return item
                     }} />
             </View>
-            <MovieList selected={selected} data={movies} />
+            <TrailerList selected={selected} data={movies} />
+            </ImageBackground>
         </View>
     )
 }
-export default SectionMovie;
+export default SectionTrailer;
