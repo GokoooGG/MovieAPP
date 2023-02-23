@@ -2,15 +2,23 @@ import React, { FC } from 'react'
 import { ImageBackground, View } from 'react-native'
 import { Props } from './types'
 import styles from './containerStyle';
+import LinearGradient from 'react-native-linear-gradient';
 
 const HomeContainer: FC<Props | any> = (props) => {
     return (
         <View style={[styles.viewMain, props.style]} >
             {props.source ?
-                <ImageBackground source={props.source} resizeMode='cover' style={styles.image}>
-                    <View style={[styles.viewSecond, props.style2]}>
-                        {props.children}
-                    </View>
+                <ImageBackground source={props.source} style={styles.image}>
+                    {props.linearG ?
+                        <LinearGradient style={{ flex: 1 }} colors={['rgba(3,37,65, 0.8)', 'rgba(3,37,65, 0.75)']} >
+                            <View style={[styles.viewSecond, props.style2]}>
+                                {props.children}
+                            </View>
+                        </LinearGradient> :
+                        <View style={[styles.viewSecond, props.style2]}>
+                            {props.children}
+                        </View>
+                    }
                 </ImageBackground> :
                 <View style={[styles.viewSecond, props.style2]}>
                     {props.children}

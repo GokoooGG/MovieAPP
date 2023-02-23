@@ -3,7 +3,7 @@ import theme from "../../utils/theme";
 
 const styles = StyleSheet.create({
     text: {
-        color: theme.colors.tmdbDarkBlue,
+        color: 'white',
         paddingHorizontal: 20,
         fontWeight: '600',
         fontSize: 25

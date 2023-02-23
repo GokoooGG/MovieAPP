@@ -6,7 +6,8 @@ import SearchInput from '../components/SearchInput/searchInput';
 
 import theme from '../utils/theme';
 import SectionMovie from '../components/SectionMovie/section-movie';
-import SectionTrailer from '../components/SectionMovie/section-trailer';
+import SectionTrailer from '../components/SectionTrailer/section-trailer';
+
 
 
 function HomeScreen({ }) {
@@ -17,7 +18,7 @@ function HomeScreen({ }) {
     return (
         <SafeAreaView style={{ flex: 1 }} >
             <ScrollView>
-                <HomeContainer source={image1} style={{ height: 300 }} style2={{ paddingHorizontal: 20 }} >
+                <HomeContainer source={image1} linearG={true} style={{ height: 300 }} style2={{ paddingHorizontal: 20 }} >
                     <Text style={[styles.text, { marginTop: 20 }]} >Welcome.</Text>
                     <Text style={[styles.text, { fontWeight: '600', fontSize: 25, width: 360 }]} >
                         Millions of movies, TV shows and people to discover. Explore now..
@@ -33,15 +34,30 @@ function HomeScreen({ }) {
                 </HomeContainer>
 
                 <HomeContainer source={backLogo}>
-                    <SectionMovie selectionList={['Today', 'This Week']} selected='day' keyWord='trend'>Trending</SectionMovie>
+                    <SectionMovie
+                        headerShown={true}
+                        selectionList={['Today', 'This Week']}
+                        selected='day'
+                        keyWord='trend'
+                        header='Trending' />
                 </HomeContainer>
 
                 <HomeContainer>
-                    <SectionMovie selectionList={['Streaming', 'On Tv', 'Top Rated', 'Up Coming']} selected='movie/popular' keyWord='popular'>What's Popular</SectionMovie>
+                    <SectionMovie
+                        headerShown={true}
+                        selectionList={['Streaming', 'On Tv', 'Top Rated', 'Up Coming']}
+                        selected='movie/popular'
+                        keyWord='popular'
+                        header='Whats Popular' />
                 </HomeContainer>
 
                 <HomeContainer style={{ height: 350 }}>
-                    <SectionTrailer selectionList={['Streaming', 'On Tv','Up Coming']} selected='movie/popular' keyWord='popular'>Latest Trailers</SectionTrailer>
+                    <SectionTrailer
+                        headerShown={true}
+                        selectionList={['Streaming', 'On Tv', 'Up Coming']}
+                        selected='movie/popular'
+                        keyWord='popular'
+                        header='Latest Trailers' />
                 </HomeContainer>
 
             </ScrollView>

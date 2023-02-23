@@ -14,7 +14,7 @@ const TrailerList: FC<Props | any> = (props) => {
         <ScrollView horizontal={true} >
             {
                 props.data.map((item: any) => (
-                    <Trailer key={item.id} source={imagePath + item.backdrop_path} title={item.title || item.name} />
+                    <Trailer key={item.id} id={item.id} source={imagePath + item.backdrop_path} title={item.title || item.name} />
                 ))
             }
         </ScrollView>

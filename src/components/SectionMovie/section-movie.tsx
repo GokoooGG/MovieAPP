@@ -34,49 +34,51 @@ const SectionMovie: FC<Props> = (props) => {
 
     return (
         <View style={{ flex: 1 }}>
-            <View style={styles.view}>
-                <Text style={styles.text} >{props.children}</Text>
-                <SelectDropdown
-                    onChangeSearchInputText={() => { }}
-                    buttonStyle={styles.button}
-                    buttonTextStyle={styles.buttonText}
-                    selectedRowTextStyle={{ color: theme.colors.tmdbLighterGreen }}
-                    rowTextStyle={{ color: theme.colors.tmdbDarkBlue, fontWeight: '600' }}
-                    dropdownStyle={styles.dropDown}
-                    selectedRowStyle={{ backgroundColor: theme.colors.tmdbDarkBlue, borderRadius: 20, }}
-                    data={data}
-                    defaultValueByIndex={0}
-                    onSelect={(selectedItem, index) => {
-                        if (selectedItem == 'Today') {
-                            setSelected("day")
-                        }
-                        else if (selectedItem == 'This Week') {
-                            setSelected("week")
-                        }
-                        else if (selectedItem == 'Streaming') {
-                            setSelected("movie/popular")
-                        }
-                        else if (selectedItem == 'On Tv') {
-                            setSelected("tv/popular")
-                        }
-                        else if (selectedItem == 'Top Rated') {
-                            setSelected("movie/top_rated")
-                        }
-                        else if (selectedItem == 'Up Coming') {
-                            setSelected("movie/upcoming")
-                        }
-                    }}
-                    buttonTextAfterSelection={(selectedItem, index) => {
-                        // text represented after item is selected
-                        // if data array is an array of objects then return selectedItem.property to render after item is selected
-                        return selectedItem
-                    }}
-                    rowTextForSelection={(item, index) => {
-                        // text represented for each item in dropdown
-                        // if data array is an array of objects then return item.property to represent item in dropdown
-                        return item
-                    }} />
-            </View>
+            {props.headerShown ?
+                <View style={styles.view}>
+                    <Text style={styles.text} >{props.header}</Text>
+                    <SelectDropdown
+                        onChangeSearchInputText={() => { }}
+                        buttonStyle={styles.button}
+                        buttonTextStyle={styles.buttonText}
+                        selectedRowTextStyle={{ color: theme.colors.tmdbLighterGreen }}
+                        rowTextStyle={{ color: theme.colors.tmdbDarkBlue, fontWeight: '600' }}
+                        dropdownStyle={styles.dropDown}
+                        selectedRowStyle={{ backgroundColor: theme.colors.tmdbDarkBlue, borderRadius: 20, }}
+                        data={data}
+                        defaultValueByIndex={0}
+                        onSelect={(selectedItem, index) => {
+                            if (selectedItem == 'Today') {
+                                setSelected("day")
+                            }
+                            else if (selectedItem == 'This Week') {
+                                setSelected("week")
+                            }
+                            else if (selectedItem == 'Streaming') {
+                                setSelected("movie/popular")
+                            }
+                            else if (selectedItem == 'On Tv') {
+                                setSelected("tv/popular")
+                            }
+                            else if (selectedItem == 'Top Rated') {
+                                setSelected("movie/top_rated")
+                            }
+                            else if (selectedItem == 'Up Coming') {
+                                setSelected("movie/upcoming")
+                            }
+                        }}
+                        buttonTextAfterSelection={(selectedItem, index) => {
+                            // text represented after item is selected
+                            // if data array is an array of objects then return selectedItem.property to render after item is selected
+                            return selectedItem
+                        }}
+                        rowTextForSelection={(item, index) => {
+                            // text represented for each item in dropdown
+                            // if data array is an array of objects then return item.property to represent item in dropdown
+                            return item
+                        }} />
+                </View> : <></>
+            }
             <MovieList selected={selected} data={movies} />
         </View>
     )

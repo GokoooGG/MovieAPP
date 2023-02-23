@@ -5,4 +5,5 @@ export interface Props {
     style?: StyleProp<ViewStyle>;
     title?: string;
     source?: string;
+    id:number;
 }

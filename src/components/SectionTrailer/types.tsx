@@ -2,9 +2,10 @@ import { ReactNode } from "react";
 import { StyleProp,ViewStyle} from "react-native";
 
 export interface Props {
-    children : ReactNode;
     style?: StyleProp<ViewStyle>;
-    style2?: StyleProp<ViewStyle>;
-    source?: string;
-    linearG?: boolean;
+    selectionList:Array<string>;
+    selected:string;
+    keyWord:string;
+    header?:string;
+    headerShown:boolean;
 }

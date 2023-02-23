@@ -21,7 +21,7 @@ export const getPopularMovies = async (keyword:string) => {
     return data;
 }
 
-export const getMovieVideo = async (keyword:string) => {
+export const getMovieVideo = async (keyword:number) => {
     const res = await fetch(url(`movie/${keyword}/videos`))
     const data = await res.json()
     return data;
