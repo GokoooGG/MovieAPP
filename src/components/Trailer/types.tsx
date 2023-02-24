@@ -6,4 +6,5 @@ export interface Props {
     title?: string;
     source?: string;
     id:number;
+    type:string;
 }

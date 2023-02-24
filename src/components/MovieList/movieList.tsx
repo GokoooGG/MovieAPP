@@ -7,7 +7,7 @@ import { imagePath } from '../../services/index';
 
 
 
-const MovieList: FC<Props | any> = (props) => {
+const MovieList: FC<Props> = (props) => {
 
    
     return (

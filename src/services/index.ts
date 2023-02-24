@@ -1,7 +1,7 @@
 const baseUrl = "https://api.themoviedb.org/3/"
 const defaultParams = "?api_key=9491772c898b766bec3d7dfcaac4b98e&language=en-US"
 export const imagePath = "https://image.tmdb.org/t/p/w500"
-export const videoPath = "https://www.youtube.com/watch?v="
+
 const url = (url: string) => {
     return baseUrl + url + defaultParams
 }
@@ -21,8 +21,8 @@ export const getPopularMovies = async (keyword:string) => {
     return data;
 }
 
-export const getMovieVideo = async (keyword:number) => {
-    const res = await fetch(url(`movie/${keyword}/videos`))
+export const getMovieVideo = async (type:string, keyword:number) => {
+    const res = await fetch(url(`${type}/${keyword}/videos`))
     const data = await res.json()
     return data;
 }

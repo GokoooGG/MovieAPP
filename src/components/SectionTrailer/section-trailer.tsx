@@ -24,16 +24,8 @@ const SectionTrailer: FC<Props> = (props) => {
 
 
     const initMovies = async () => {
-        if (props.keyWord == 'trend') {
-            const movieData = await getTrendMovies(selected)
-            setMovies(movieData.results)
-
-        }
-        else if (props.keyWord == 'popular') {
-            const movieData = await getPopularMovies(selected)
-            setMovies(movieData.results)
-        }
-
+        const movieData = await getPopularMovies(selected + "/popular")
+        setMovies(movieData.results)
     }
 
 
@@ -55,24 +47,15 @@ const SectionTrailer: FC<Props> = (props) => {
                                 data={data}
                                 defaultValueByIndex={0}
                                 onSelect={(selectedItem, index) => {
-                                    if (selectedItem == 'Today') {
-                                        setSelected("day")
+
+                                    if (selectedItem == 'Streaming') {
+                                        setSelected("movie")
                                     }
-                                    else if (selectedItem == 'This Week') {
-                                        setSelected("week")
-                                    }
-                                    else if (selectedItem == 'Streaming') {
-                                        setSelected("movie/popular")
-                                    }
+
                                     else if (selectedItem == 'On Tv') {
-                                        setSelected("tv/popular")
+                                        setSelected("tv")
                                     }
-                                    else if (selectedItem == 'Top Rated') {
-                                        setSelected("movie/top_rated")
-                                    }
-                                    else if (selectedItem == 'Up Coming') {
-                                        setSelected("movie/upcoming")
-                                    }
+
                                 }}
                                 buttonTextAfterSelection={(selectedItem, index) => {
                                     // text represented after item is selected

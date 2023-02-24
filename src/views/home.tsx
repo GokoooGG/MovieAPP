@@ -54,9 +54,8 @@ function HomeScreen({ }) {
                 <HomeContainer style={{ height: 350 }}>
                     <SectionTrailer
                         headerShown={true}
-                        selectionList={['Streaming', 'On Tv', 'Up Coming']}
-                        selected='movie/popular'
-                        keyWord='popular'
+                        selectionList={['Streaming', 'On Tv']}
+                        selected='movie'
                         header='Latest Trailers' />
                 </HomeContainer>
 

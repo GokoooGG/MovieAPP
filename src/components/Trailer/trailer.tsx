@@ -5,7 +5,6 @@ import YoutubePlayer from "react-native-youtube-iframe";
 
 import { Props } from './types'
 import styles from './trailerStyle';
-import { videoPath } from '../../services';
 import { getMovieVideo } from '../../services/index';
 
 
@@ -16,22 +15,31 @@ const Trailer: FC<Props> = (props) => {
 
     const [trailer, setTrailer] = useState<any>([])
     const [isVisible, setVisible] = useState(false);
-    const [playing, setPlaying] = useState(false);
+
+
 
     useEffect(() => {
-        initMovies()
-    }, [])
+
+        initTrailers()
+
+    }, [isVisible])
 
 
-    const initMovies = async () => {
-        const movieData = await getMovieVideo(props.id)
-        setTrailer(movieData.results)
+    const initTrailers = async () => {
+        const trailerData = await getMovieVideo(props.type, props.id)
+        setTrailer(trailerData.results.at(-1))
     }
 
 
     return (
         <View>
-            <Pressable style={styles.movieButton} onPress={() => { setVisible(true) }}>
+            <Pressable style={styles.movieButton} onPress={() => {
+                if (trailer == undefined) {
+                    Alert.alert("No Vieo Avaliable");
+                } else {
+                    setVisible(true)
+                } 
+            }}>
                 <View style={styles.viewContain}>
                     <ImageBackground
                         source={{ uri: props.source }}
@@ -61,7 +69,7 @@ const Trailer: FC<Props> = (props) => {
                             height={300}
                             width={400}
                             play={false}
-                            videoId={'iee2TATGMyI'} />
+                            videoId={trailer?.key} />
                     </View>
                 </Pressable>
             </Modal>
