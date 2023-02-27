@@ -1,14 +1,18 @@
 import React, { FC } from 'react'
-import { View, ImageBackground, TouchableOpacity, Text, Pressable } from 'react-native';
+import { View, ImageBackground, Text, Pressable } from 'react-native';
 import { Props } from './types'
 import styles from './movieStyle';
 import CircularProgress from 'react-native-circular-progress-indicator';
+import MovieDetail from '../../views/movie-detail';
+import { useNavigation } from '@react-navigation/native';
 
 
 
-const Movie: FC<Props> = (props) => {
+
+const Movie: FC<Props> = (props,{navigation}:any) => {
+    
     return (
-        <Pressable style={styles.movieButton}>
+        <Pressable style={styles.movieButton} onPress={()=>navigation.navigate(MovieDetail)}>
             <View style={styles.viewContain}>
                 <ImageBackground
                     source={{ uri: props.source }}

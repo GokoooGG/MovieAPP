@@ -39,7 +39,8 @@ function HomeScreen({ }) {
                         selectionList={['Today', 'This Week']}
                         selected='day'
                         keyWord='trend'
-                        header='Trending' />
+                        header='Trending' 
+                        />
                 </HomeContainer>
 
                 <HomeContainer>
