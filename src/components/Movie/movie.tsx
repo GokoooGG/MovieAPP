@@ -9,32 +9,41 @@ import { useNavigation } from '@react-navigation/native';
 
 
 
-const Movie: FC<Props> = (props,{navigation}:any) => {
-    
+const Movie: FC<Props> = (Props) => {
+    const navigation = useNavigation();
     return (
-        <Pressable style={styles.movieButton} onPress={()=>navigation.navigate(MovieDetail)}>
+        <Pressable style={styles.movieButton} onPress={() => navigation.navigate('Home', {
+            screen: 'Detail',
+            params: {
+                title: Props.title,
+                data: Props.data,
+                image: Props.source
+            },
+
+
+        })}>
             <View style={styles.viewContain}>
                 <ImageBackground
-                    source={{ uri: props.source }}
+                    source={{ uri: Props.source }}
                     resizeMode='contain'
                     imageStyle={{ borderRadius: 10 }}
                     style={styles.image}
                 >
                     <View style={styles.viewCircle}>
-                        <CircularProgress 
-                        value={Math.round(props.percent*10)} 
-                        radius={30}
-                        activeStrokeWidth={6}
-                        inActiveStrokeWidth={6}
-                        progressValueStyle={{  color: 'white' , paddingRight:8 }}
+                        <CircularProgress
+                            value={Math.round(Props.percent * 10)}
+                            radius={30}
+                            activeStrokeWidth={6}
+                            inActiveStrokeWidth={6}
+                            progressValueStyle={{ color: 'white', paddingRight: 8 }}
                         />
                         <Text style={styles.textPercent}>%</Text>
                     </View>
                 </ImageBackground>
             </View>
             <View style={styles.viewText}>
-                <Text style={styles.text}>{props.title}</Text>
-                <Text style={styles.textDate}>{props.date}</Text>
+                <Text style={styles.text}>{Props.title}</Text>
+                <Text style={styles.textDate}>{Props.date}</Text>
             </View>
         </Pressable>
     )

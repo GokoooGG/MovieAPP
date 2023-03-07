@@ -14,9 +14,18 @@ const Drawer = createDrawerNavigator()
 
 function HomePageStack() {
     return (
-        <HomeStack.Navigator screenOptions={{ headerTitleAlign: 'center' }} >
+        <HomeStack.Navigator screenOptions={{ headerTitleAlign: 'center'}} >
             <HomeStack.Screen name="HomePage" component={HomeScreen} options={{ headerShown: false }} />
-            <HomeStack.Screen name="Detail" component={MovieDetail} />
+            <HomeStack.Screen name="Detail" component={MovieDetail} options={({ route, navigation }) => {
+                return {
+                    title: route.params?.title,
+                    headerStyle: {
+                        backgroundColor:theme.colors.tmdbDarkBlue,
+                    },
+                    headerTintColor: '#fff',
+                    headerShown: false,
+                }
+            }} />           
         </HomeStack.Navigator>
     );
 }
@@ -24,7 +33,7 @@ function HomePageStack() {
 function draverNavigator() {
     return (
         <NavigationContainer>
-            <Drawer.Navigator initialRouteName="Home">
+            <Drawer.Navigator initialRouteName="Home" screenOptions={{ }}>
                 <Drawer.Screen name="Home" component={HomePageStack} options={{ headerTintColor: '#fff', headerStyle: { backgroundColor: '#032541' } }} />
                 <Drawer.Screen name="Movies" component={Movies} options={{ headerTintColor: '#fff', headerStyle: { backgroundColor: '#032541' } }} />
                 <Drawer.Screen name="Tv Shows" component={TvShows} options={{ headerTintColor: '#fff', headerStyle: { backgroundColor: '#032541' } }} />

@@ -7,4 +7,5 @@ export interface Props {
     date?:string;
     source?: string;
     percent: number;
+    data:any;
 }

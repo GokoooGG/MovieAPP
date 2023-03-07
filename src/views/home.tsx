@@ -10,11 +10,10 @@ import SectionTrailer from '../components/SectionTrailer/section-trailer';
 
 
 
-function HomeScreen({ }) {
+function HomeScreen({navigation}:any) {
     const image1 = { uri: 'https://www.themoviedb.org/t/p/w1920_and_h600_multi_faces_filter(duotone,00192f,00baff)/zqkmTXzjkAgXmEWLRsY4UpTWCeo.jpg' }
     const backLogo = require('../assets/images/backLogo.png')
 
-    const [selected, setSelected] = useState([])
     return (
         <SafeAreaView style={{ flex: 1 }} >
             <ScrollView>

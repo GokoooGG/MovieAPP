@@ -14,7 +14,7 @@ const MovieList: FC<Props> = (props) => {
         <ScrollView horizontal={true} >
             {
                 props.data.map((item: any) => (
-                    <Movie key={item.id} source={imagePath + item.poster_path} title={item.title || item.name} date={item.release_date || item.first_air_date} percent={item.vote_average} />
+                    <Movie key={item.id} data={item} source={imagePath + item.poster_path} title={item.title || item.name} date={item.release_date || item.first_air_date} percent={item.vote_average} />
                 ))
             }
         </ScrollView>
