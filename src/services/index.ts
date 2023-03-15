@@ -26,3 +26,10 @@ export const getMovieVideo = async (type:string, keyword:number) => {
     const data = await res.json()
     return data;
 }
+
+export const getMovieData = async (keyword:number) => {
+    const res = await fetch(url(`movie/${keyword}`))
+    const data = await res.json()
+
+    return data;
+}

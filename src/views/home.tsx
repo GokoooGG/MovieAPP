@@ -22,7 +22,7 @@ function HomeScreen({navigation}:any) {
                     <Text style={[styles.text, { fontWeight: '600', fontSize: 25, width: 360 }]} >
                         Millions of movies, TV shows and people to discover. Explore now..
                     </Text>
-                    <SearchInput styleview={{ marginTop: 30 }} placeholder='Search for a movie,tv shows,person......'>
+                    <SearchInput styleview={{ marginTop: 20}} placeholder='Search for a movie,tv shows,person......'>
                         <Button style={{
                             backgroundColor: theme.colors.tmdbLightGreen,
                             height: 44,

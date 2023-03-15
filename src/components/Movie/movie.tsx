@@ -3,7 +3,6 @@ import { View, ImageBackground, Text, Pressable } from 'react-native';
 import { Props } from './types'
 import styles from './movieStyle';
 import CircularProgress from 'react-native-circular-progress-indicator';
-import MovieDetail from '../../views/movie-detail';
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -16,11 +15,9 @@ const Movie: FC<Props> = (Props) => {
             screen: 'Detail',
             params: {
                 title: Props.title,
-                data: Props.data,
-                image: Props.source
+                id: Props.data.id,
+
             },
-
-
         })}>
             <View style={styles.viewContain}>
                 <ImageBackground
