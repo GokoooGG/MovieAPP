@@ -107,6 +107,7 @@ function MovieDetail({ route }: any) {
       <View>
         <Text style={{fontWeight:"700",fontSize:20,color:"black"}}>Overview</Text>
         <Text>{movie?.overview}</Text>
+
       </View>
 
       </ScrollView> 
