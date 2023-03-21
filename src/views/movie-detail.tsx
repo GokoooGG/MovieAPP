@@ -157,7 +157,7 @@ function MovieDetail({ route }: any) {
 
         </View>
 
-        <View style={{  alignItems: "center", backgroundColor: colors.colorOne, borderTopWidth: 1, borderBottomWidth: 1, borderColor: "black", paddingVertical:10 }}>
+        <View style={{  alignItems: "center", backgroundColor: colors.colorOne, borderTopWidth: .5, borderBottomWidth: .5, paddingVertical:10 }}>
           <Text style={styles.textsub}>{date} {'\u2B24'} {Hour}h {Second}s</Text>
           <Text style={styles.textsub}>{movie?.genres?.map((item: any) => (item.name + "-"))}</Text>
         </View>
