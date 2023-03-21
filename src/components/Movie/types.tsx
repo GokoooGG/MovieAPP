@@ -8,4 +8,5 @@ export interface Props {
     source?: string;
     percent: number;
     data:any;
+    selected?:string;
 }

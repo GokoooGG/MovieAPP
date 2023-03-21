@@ -10,13 +10,16 @@ import { useNavigation } from '@react-navigation/native';
 
 const Movie: FC<Props> = (Props) => {
     const navigation = useNavigation();
+    let re = /\-/gi
+    let date = Props.date?.replace(re, "/")
+
     return (
         <Pressable style={styles.movieButton} onPress={() => navigation.navigate('Home', {
             screen: 'Detail',
             params: {
                 title: Props.title,
                 id: Props.data.id,
-
+                selected: Props.selected,
             },
         })}>
             <View style={styles.viewContain}>
@@ -40,7 +43,7 @@ const Movie: FC<Props> = (Props) => {
             </View>
             <View style={styles.viewText}>
                 <Text style={styles.text}>{Props.title}</Text>
-                <Text style={styles.textDate}>{Props.date}</Text>
+                <Text style={styles.textDate}>{date}</Text>
             </View>
         </Pressable>
     )
