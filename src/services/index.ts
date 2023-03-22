@@ -38,4 +38,17 @@ export const getMovieData = async (keyword: number, type: string) => {
         const data = await res.json()
         return data;
     }
+
+}
+export const getMovieCredit = async (keyword: number, type: string) => {
+    if (type == "tv/popular") {
+        const res = await fetch(url(`tv/${keyword}/credits`))
+        const data = await res.json()
+        return data;
+    }
+    else {
+        const res = await fetch(url(`movie/${keyword}/credits`))
+        const data = await res.json()
+        return data;
+    }
 }

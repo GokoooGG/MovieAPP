@@ -6,9 +6,8 @@ import CircularProgress from 'react-native-circular-progress-indicator';
 import YoutubePlayer from "react-native-youtube-iframe";
 import ImageColors from 'react-native-image-colors';
 import HomeContainer from '../components/Container/HomeContainer';
-import { getMovieData, getMovieVideo, imagePath } from '../services';
+import { getMovieData, getMovieVideo, imagePath, getMovieCredit } from '../services';
 import theme from '../utils/theme';
-
 
 const initialState = {
   colorOne: "",
@@ -24,13 +23,14 @@ function MovieDetail({ route }: any) {
   const [trailer, setTrailer] = useState<any>([])
   const [isVisible, setVisible] = useState(false)
   const [movie, setMovieData] = useState<any>([])
+  const [credits, setCredits] = useState<any>([])
   const [colors, setColors] = useState<any>(initialState)
 
   useEffect(() => {
 
     initTrailers()
     initData()
-
+    initCredit()
 
   }, [])
 
@@ -53,8 +53,8 @@ function MovieDetail({ route }: any) {
       case 'android':
         // android result properties
         setColors({
-          colorOne: result.lightVibrant,
-          colorTwo: result.average,
+          colorOne: result.average,
+          colorTwo: result.darkVibrant,
         })
         break
       case 'ios':
@@ -78,6 +78,10 @@ function MovieDetail({ route }: any) {
     const movieData = await getMovieData(route.params?.id, selected)
     setMovieData(movieData)
   }
+  const initCredit = async () => {
+    const credit = await getMovieCredit(route.params?.id, selected)
+    setCredits(credit.crew)
+  }
 
 
   let re = /\-/gi
@@ -87,18 +91,19 @@ function MovieDetail({ route }: any) {
   let Second = (movie?.runtime % 60 || movie?.episode_run_time % 60)
 
 
+
   return (
 
     <SafeAreaView style={{ flex: 1 }} >
       <ScrollView >
         <HomeContainer
           source={{ uri: imagePath + movie?.backdrop_path }}
-          style={{ height: 200, backgroundColor: colors.colorOne }}
+          style={{ height: 200, backgroundColor: colors?.colorOne }}
           style2={{ marginLeft: -30 }}
           style3={{ marginLeft: 50 }}
           linearG={true}
-          lineargColor={colors.colorOne} >
-          <View style={styles.view}>
+          lineargColor={colors?.colorOne} >
+          <View style={styles.viewImage}>
             <ImageBackground
               source={{ uri: imagePath + movie?.poster_path }}
               resizeMode='contain'
@@ -109,24 +114,26 @@ function MovieDetail({ route }: any) {
           </View>
         </HomeContainer>
 
-        <View style={{ justifyContent: "center", alignItems: "center", backgroundColor: colors.colorOne }}>
-          <Text style={styles.text}>{movie?.original_title}</Text>
+        <View style={{ justifyContent: "center", alignItems: "center", backgroundColor: colors?.colorOne }}>
+          <Text style={styles.textHead}>{movie?.original_title}</Text>
 
           <View style={{ flexDirection: "row", alignItems: "center", marginVertical: 20 }}>
             <View style={styles.viewCircle}>
               <CircularProgress
                 value={Math.round(movie?.vote_average * 10)}
-                radius={30}
+                radius={35}
                 activeStrokeWidth={6}
                 inActiveStrokeWidth={6}
-                progressValueStyle={{ color: 'white', paddingRight: 8 }}
+                progressValueStyle={{ color: 'white' }}
+                valueSuffix={'%'}
               />
-              <Text style={styles.textPercent}>%</Text>
-              <Text style={{ position: "absolute", paddingLeft: 160, fontSize: 16, fontWeight: "900", color: "black" }}>Users Score</Text>
             </View>
+
+            <Text style={{ paddingLeft: 10, paddingRight: 70, fontSize: 18, fontWeight: "900", color: "white" }}>Users Score</Text>
+
             <Pressable onPress={() => {
               if (trailer == undefined) {
-                Alert.alert("No Vieo Avaliable");
+                Alert.alert("No Video Avaliable");
               } else {
                 setVisible(true)
               }
@@ -157,15 +164,37 @@ function MovieDetail({ route }: any) {
 
         </View>
 
-        <View style={{  alignItems: "center", backgroundColor: colors.colorOne, borderTopWidth: .5, borderBottomWidth: .5, paddingVertical:10 }}>
+        <View style={[styles.viewSec, { backgroundColor: colors.colorOne }]}>
           <Text style={styles.textsub}>{date} {'\u2B24'} {Hour}h {Second}s</Text>
           <Text style={styles.textsub}>{movie?.genres?.map((item: any) => (item.name + "-"))}</Text>
         </View>
 
-        <View>
-          <Text style={{ fontWeight: "700", fontSize: 20, color: "black" }}>Overview</Text>
-          <Text>{movie?.overview}</Text>
+        <View style={[styles.viewMain, { backgroundColor: colors.colorOne, paddingTop: 10 }]}>
+          <Text style={[styles.textsub, { fontStyle: "italic", color: "lightgrey" }]}>{movie?.tagline}</Text>
+          <Text style={[styles.textsub, { fontWeight: "700", fontSize: 20, paddingTop: 10 }]}>Overview</Text>
+          <Text style={[styles.textsub, { paddingBottom: 30 }]}>{movie?.overview}</Text>
+        </View>
 
+        <View style={[styles.viewMain, { backgroundColor: colors.colorOne, paddingBottom: 10 }]}>
+          {
+            credits?.map((item: any) => (
+              item.job == "Director" &&
+              <>
+                <Text style={[styles.textsub, { fontWeight: "700", paddingBottom: 5 }]}>Director </Text>
+                <Text style={[styles.textsub, { paddingBottom: 10 }]}>{item.name}</Text>
+              </>
+            ))
+          }
+
+          {
+            credits?.map((item: any) => (
+              item.job == "Writer" &&
+              <>
+                <Text style={[styles.textsub, { fontWeight: "700", paddingBottom: 5 }]}>Writer </Text>
+                <Text style={[styles.textsub, { paddingBottom: 10 }]}>{item.name}</Text>
+              </>
+            ))
+          }
         </View>
 
       </ScrollView>
@@ -174,20 +203,31 @@ function MovieDetail({ route }: any) {
 }
 
 const styles = StyleSheet.create({
-  view: {
+  viewMain: {
+    paddingLeft: 20,
+    paddingHorizontal: 20,
+  },
+  viewSec: {
+    alignItems: "center",
+    borderTopWidth: .5,
+    borderBottomWidth: .8,
+    paddingVertical: 10,
+
+  },
+  viewImage: {
     marginTop: 20,
     height: 150,
     width: 100
   },
-  text: {
+  textHead: {
     fontWeight: '600',
     fontSize: 25,
-    color: 'black',
+    color: 'white',
     marginVertical: 10,
   },
   textsub: {
-    fontSize: 16,
-    color: "black",
+    fontSize: 18,
+    color: "white",
   },
   image: {
     flex: 1,
@@ -197,12 +237,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    height: 60,
-    width: 60,
+    height: 70,
+    width: 70,
     backgroundColor: theme.colors.tmdbDarkBlue,
     borderRadius: 100,
-    marginRight: 150,
-    marginLeft: -20
+    marginLeft: -35
   },
   textPercent: {
     position: 'absolute',

@@ -35,7 +35,7 @@ const Trailer: FC<Props> = (props) => {
         <View>
             <Pressable style={styles.movieButton} onPress={() => {
                 if (trailer == undefined) {
-                    Alert.alert("No Vieo Avaliable");
+                    Alert.alert("No Video Avaliable");
                 } else {
                     setVisible(true)
                 } 
