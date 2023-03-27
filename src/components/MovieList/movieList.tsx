@@ -11,6 +11,7 @@ const MovieList: FC<Props> = (props) => {
 
    
     return (
+        
         <ScrollView horizontal={true} >
             {
                 props.data.map((item: any) => (
@@ -19,6 +20,7 @@ const MovieList: FC<Props> = (props) => {
             }
         </ScrollView>
     )
+
 }
 
 export default MovieList;

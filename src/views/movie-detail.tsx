@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Alert, ImageBackground, Modal, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import CircularProgress from 'react-native-circular-progress-indicator';
@@ -8,6 +8,7 @@ import ImageColors from 'react-native-image-colors';
 import HomeContainer from '../components/Container/HomeContainer';
 import { getMovieData, getMovieVideo, imagePath, getMovieCredit } from '../services';
 import theme from '../utils/theme';
+import CastList from '../components/castLists/CastList';
 
 const initialState = {
   colorOne: "",
@@ -26,28 +27,31 @@ function MovieDetail({ route }: any) {
   const [credits, setCredits] = useState<any>([])
   const [colors, setColors] = useState<any>(initialState)
 
+ 
+
   useEffect(() => {
 
     initTrailers()
     initData()
     initCredit()
-
+    
   }, [])
 
   useEffect(() => {
-    if (movie) {
+    if ( movie) {
       fetchColors()
+      
     }
   }, [movie])
 
   const fetchColors = async () => {
-    const imgPath = imagePath + movie?.poster_path;
+    const imgPath = imagePath + movie?.poster_path 
     const result = await ImageColors.getColors(imgPath, {
       fallback: '#000000',
       quality: 'low',
       pixelSpacing: 5,
       cache: true,
-    })
+    }).catch()
 
     switch (result.platform) {
       case 'android':
@@ -80,14 +84,14 @@ function MovieDetail({ route }: any) {
   }
   const initCredit = async () => {
     const credit = await getMovieCredit(route.params?.id, selected)
-    setCredits(credit.crew)
+    setCredits(credit)
   }
 
 
   let re = /\-/gi
   let date = (movie?.release_date?.replace(re, "/") || movie?.first_air_date?.replace(re, "/"))
 
-  let Hour = Math.round(movie?.runtime / 60 || movie?.episode_run_time / 60)
+  let Hour = Math.round((movie?.runtime / 60)-1  || (movie?.episode_run_time / 60)-1)
   let Second = (movie?.runtime % 60 || movie?.episode_run_time % 60)
 
 
@@ -171,30 +175,33 @@ function MovieDetail({ route }: any) {
 
         <View style={[styles.viewMain, { backgroundColor: colors.colorOne, paddingTop: 10 }]}>
           <Text style={[styles.textsub, { fontStyle: "italic", color: "lightgrey" }]}>{movie?.tagline}</Text>
-          <Text style={[styles.textsub, { fontWeight: "700", fontSize: 20, paddingTop: 10 }]}>Overview</Text>
+          <Text style={[styles.textsub, { fontWeight: "800", fontSize: 21, paddingTop: 10 }]}>Overview</Text>
           <Text style={[styles.textsub, { paddingBottom: 30 }]}>{movie?.overview}</Text>
         </View>
 
         <View style={[styles.viewMain, { backgroundColor: colors.colorOne, paddingBottom: 10 }]}>
-          {
-            credits?.map((item: any) => (
-              item.job == "Director" &&
-              <>
-                <Text style={[styles.textsub, { fontWeight: "700", paddingBottom: 5 }]}>Director </Text>
-                <Text style={[styles.textsub, { paddingBottom: 10 }]}>{item.name}</Text>
-              </>
-            ))
-          }
 
+          <Text style={[styles.textsub, { fontWeight: "800", paddingBottom: 5 }]}>Directors </Text>
           {
-            credits?.map((item: any) => (
-              item.job == "Writer" &&
-              <>
-                <Text style={[styles.textsub, { fontWeight: "700", paddingBottom: 5 }]}>Writer </Text>
-                <Text style={[styles.textsub, { paddingBottom: 10 }]}>{item.name}</Text>
-              </>
+            credits?.crew?.map((item: any) => (
+              item.job == "Director" &&
+
+              <Text style={[styles.textsub, { paddingBottom: 10 }]}>{item.name}</Text>
+
             ))
           }
+          <Text style={[styles.textsub, { fontSize: 20, fontWeight: "800", paddingBottom: 5 }]}>Writers</Text>
+          {
+            
+            credits?.crew?.map((item: any) => (
+              item.job == "Writer" &&
+              <Text style={[styles.textsub, { paddingBottom: 10 }]}>{item.name}</Text>
+            ))
+          }
+        </View>
+        
+        <View style={[styles.viewMain, { backgroundColor: colors.colorOne, paddingBottom: 10 }]}>
+          <CastList data={credits?.cast}/>
         </View>
 
       </ScrollView>
@@ -226,7 +233,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   textsub: {
-    fontSize: 18,
+    fontSize: 20,
     color: "white",
   },
   image: {

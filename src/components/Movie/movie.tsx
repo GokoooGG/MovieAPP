@@ -14,13 +14,10 @@ const Movie: FC<Props> = (Props) => {
     let date = Props.date?.replace(re, "/")
 
     return (
-        <Pressable style={styles.movieButton} onPress={() => navigation.navigate('Home', {
-            screen: 'Detail',
-            params: {
-                title: Props.title,
-                id: Props.data.id,
-                selected: Props.selected,
-            },
+        <Pressable style={styles.movieButton} onPress={() => navigation.navigate('Detail', {
+            title: Props.title,
+            id: Props.data.id,
+            selected: Props.selected,
         })}>
             <View style={styles.viewContain}>
                 <ImageBackground

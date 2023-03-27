@@ -14,8 +14,9 @@ const Drawer = createDrawerNavigator()
 
 function HomePageStack() {
     return (
+        <NavigationContainer>
         <HomeStack.Navigator screenOptions={{ headerTitleAlign: 'center'}} >
-            <HomeStack.Screen name="HomePage" component={HomeScreen} options={{ headerShown: false }} />
+            <HomeStack.Screen name="HomePage" component={DraverNavigator} options={{ headerShown: false }} />
             <HomeStack.Screen name="Detail" component={MovieDetail} options={({ route, navigation }) => {
                 return {
                     title: route.params?.title,
@@ -23,22 +24,23 @@ function HomePageStack() {
                         backgroundColor:theme.colors.tmdbDarkBlue,
                     },
                     headerTintColor: '#fff',
-                    headerShown: false,
                 }
             }} />           
         </HomeStack.Navigator>
-    );
-}
-
-function draverNavigator() {
-    return (
-        <NavigationContainer>
-            <Drawer.Navigator initialRouteName="Home" screenOptions={{ }}>
-                <Drawer.Screen name="Home" component={HomePageStack} options={{ headerTintColor: '#fff', headerStyle: { backgroundColor: '#032541' } }} />
-                <Drawer.Screen name="Movies" component={Movies} options={{ headerTintColor: '#fff', headerStyle: { backgroundColor: '#032541' } }} />
-                <Drawer.Screen name="Tv Shows" component={TvShows} options={{ headerTintColor: '#fff', headerStyle: { backgroundColor: '#032541' } }} />
-            </Drawer.Navigator>
         </NavigationContainer>
     );
 }
-export default draverNavigator;
+
+function DraverNavigator() {
+    return (
+        
+            <Drawer.Navigator initialRouteName="Home" screenOptions={{ headerTitleAlign: 'center', headerTitle:"",
+              headerShadowVisible: false}}>
+                <Drawer.Screen name="Home" component={HomeScreen} options={{ headerTintColor: '#fff', headerStyle: { backgroundColor: '#032541' } }} />
+                <Drawer.Screen name="Movies" component={Movies} options={{ headerTintColor: '#fff', headerStyle: { backgroundColor: '#032541' } }} />
+                <Drawer.Screen name="Tv Shows" component={TvShows} options={{ headerTintColor: '#fff', headerStyle: { backgroundColor: '#032541' } }} />
+            </Drawer.Navigator>
+        
+    );
+}
+export default HomePageStack;
