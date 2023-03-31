@@ -44,7 +44,7 @@ function HomePageStack() {
 function DraverNavigator() {
     return (
         
-            <Drawer.Navigator initialRouteName="Home" screenOptions={{ headerTitleAlign: 'center', headerTitle:() => <LogoTitle/> ,
+            <Drawer.Navigator initialRouteName="Home" screenOptions={{ headerTitleAlign: 'center', headerTitle:() => <LogoTitle/> ,headerStatusBarHeight:3,
               headerShadowVisible: false}}>
                 <Drawer.Screen name="Home" component={HomeScreen} options={{ headerTintColor: '#fff', headerStyle: { backgroundColor: '#032541' } }} />
                 <Drawer.Screen name="Movies" component={Movies} options={{ headerTintColor: '#fff', headerStyle: { backgroundColor: '#032541' } }} />
