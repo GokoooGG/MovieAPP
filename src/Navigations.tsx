@@ -8,15 +8,25 @@ import MovieDetail from './views/movie-detail';
 import Movies from './views/movies';
 import TvShows from './views/tv-shows';
 import theme from './utils/theme';
+import { Image } from 'react-native';
 
 const HomeStack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator()
+
+function LogoTitle() {
+    return (
+      <Image
+        style={{ width: 70, height: 50 }}
+        source={require('./assets/images/logo.png')}
+      />
+    );
+  }
 
 function HomePageStack() {
     return (
         <NavigationContainer>
         <HomeStack.Navigator screenOptions={{ headerTitleAlign: 'center'}} >
-            <HomeStack.Screen name="HomePage" component={DraverNavigator} options={{ headerShown: false }} />
+            <HomeStack.Screen name="HomePage" component={DraverNavigator} options={{ headerShown: false}} />
             <HomeStack.Screen name="Detail" component={MovieDetail} options={({ route, navigation }) => {
                 return {
                     title: route.params?.title,
@@ -34,7 +44,7 @@ function HomePageStack() {
 function DraverNavigator() {
     return (
         
-            <Drawer.Navigator initialRouteName="Home" screenOptions={{ headerTitleAlign: 'center', headerTitle:"",
+            <Drawer.Navigator initialRouteName="Home" screenOptions={{ headerTitleAlign: 'center', headerTitle:() => <LogoTitle/> ,
               headerShadowVisible: false}}>
                 <Drawer.Screen name="Home" component={HomeScreen} options={{ headerTintColor: '#fff', headerStyle: { backgroundColor: '#032541' } }} />
                 <Drawer.Screen name="Movies" component={Movies} options={{ headerTintColor: '#fff', headerStyle: { backgroundColor: '#032541' } }} />
