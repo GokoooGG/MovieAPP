@@ -4,35 +4,31 @@ import theme from "../../utils/theme";
 const styles = StyleSheet.create({
     viewContain: {
         height: 250,
-        marginTop:10
+        marginTop:15,
     },
     viewBox:{
         flex:1,
         justifyContent:"center",
-        alignItems:"center", 
-        width:130 , 
-        marginRight:10, 
-        backgroundColor:"#1E1E1E",
-        borderRadius:10,
-        elevation:12
+        height:220,
+        width:100 , 
+        marginLeft:20, 
+        backgroundColor:"white",
+        borderRadius:5,
+        elevation:10
     },
     viewImage: {
-        height: 150,
-        borderWidth:3, 
-        borderColor:"lightgray",
-        borderRadius:10,
-        marginTop:10,
+        height: 150,     
     },
     viewText: {
         flex: 1,
         justifyContent:"center",
-        alignItems:"center"
+        paddingHorizontal:5
     },
    
     text:{
-        fontSize:18,
-        fontWeight:'400',
-        color:'white',
+        fontSize:16,
+        fontWeight:'600',
+        color:'black',
     },
 
     image: {

@@ -11,7 +11,7 @@ const CastList: FC<Props> = (props) => {
     return (
 
         <View style={styles.viewContain}>
-            <ScrollView horizontal={true}>
+            <ScrollView horizontal={true} fadingEdgeLength={35}>
                 {
                     props.data?.map((item: any) => (
                         item.known_for_department == "Acting" &&
@@ -20,7 +20,7 @@ const CastList: FC<Props> = (props) => {
                             <View style={styles.viewImage}>
                                 <ImageBackground
                                     source={{ uri: (item.profile_path ? imagePath + item.profile_path : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWAEVf692EM8xBhdn86-sCDC7tKYX2aWYZgw&usqp=CAU") }}
-                                    imageStyle={{ borderRadius: 5 }}
+                                    imageStyle={{ borderTopLeftRadius: 5,borderTopRightRadius:5 }}
                                     style={styles.image}
                                 >
                                 </ImageBackground>

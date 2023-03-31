@@ -200,7 +200,8 @@ function MovieDetail({ route }: any) {
           }
         </View>
         
-        <View style={[styles.viewMain, { backgroundColor: colors.colorOne, paddingBottom: 10 }]}>
+        <View style={ { backgroundColor: "white", paddingBottom: 10  }}>
+          <Text style={ { fontSize: 22, fontWeight: "800", paddingTop:20,color: "black", paddingLeft:20 }}>Cast List</Text>
           <CastList data={credits?.cast}/>
         </View>
 
